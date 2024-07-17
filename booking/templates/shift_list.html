@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shift List</title>
+</head>
+<body>
+    <h1>Shift List</h1>
+    <ul>
+        {% for shift in shifts %}
+            <li>{{ shift.shift_name }} - <a href="{% url 'book_shift' shift.id %}">Book</a></li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_shift' %}">Add New Shift</a>
+</body>
+</html>

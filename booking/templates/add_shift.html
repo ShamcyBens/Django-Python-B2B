@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Shift</title>
+</head>
+<body>
+    <h1>Add Shift</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="shift_name">Shift Name:</label>
+        <input type="text" id="shift_name" name="shift_name"><br>
+        <label for="start_time">Start Time:</label>
+        <input type="datetime-local" id="start_time" name="start_time"><br>
+        <label for="end_time">End Time:</label>
+        <input type="datetime-local" id="end_time" name="end_time"><br>
+        <button type="submit">Add Shift</button>
+    </form>
+    <a href="{% url 'shift_list' %}">Back to Shift List</a>
+</body>
+</html>

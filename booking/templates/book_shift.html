@@ -1,0 +1,33 @@
+<!-- booking/templates/booking/book_shift.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Shift</title>
+</head>
+<body>
+    <h1>Book Shift: {{ shift.shift_name }}</h1>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="node_id">Select Node:</label>
+        <select id="node_id" name="node_id">
+            {% for node in nodes %}
+                <option value="{{ node.id }}">{{ node.node_name }}</option>
+            {% empty %}
+                <option value="">No nodes available</option>
+            {% endfor %}
+        </select><br>
+        <button type="submit">Book Shift</button>
+    </form>
+    <a href="{% url 'shift_list' %}">Back to Shift List</a>
+    <br>
+    <a href="{% url 'bookings' %}">See all Bookings</a>
+
+</body>
+</html>
