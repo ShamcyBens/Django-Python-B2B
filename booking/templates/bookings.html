@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{ booking.shift.shift_name }}</td>
                         <td>{{ booking.node.node_name }}</td>
-                        <p>Status: {{ booking.get_status_display }}</p>
+                        <td>{{ booking.get_status_display }}</td>
                         <td>{{ booking.created_at }}</td>
                     </tr>
                 {% empty %}

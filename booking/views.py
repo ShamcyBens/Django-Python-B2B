@@ -1,23 +1,27 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Shift, Booking, Node
+from .models import *
 from django.http import JsonResponse
 from django.contrib import messages
+from datetime import datetime
 
 
 def home(request):
     return render(request, 'home.html')
-
 
 def add_shift(request):
     if request.method == 'POST':
         shift_name = request.POST['shift_name']
         start_time = request.POST['start_time']
         end_time = request.POST['end_time']
+
+        # Convert string inputs to datetime objects
+        start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M')
+        end_time = datetime.strptime(end_time, '%Y-%m-%dT%H:%M')
+
         Shift.objects.create(shift_name=shift_name, start_time=start_time, end_time=end_time)
         messages.success(request, 'Shift added successfully.')
         return redirect('shift_list')
     return render(request, 'add_shift.html')
-
 # views.py
 def shift_list(request):
     shifts = Shift.objects.filter(booked=False)  # Only show unbooked shifts
