@@ -1,20 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Shift</title>
-</head>
-<body>
-    <h1>Add Shift</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <label for="shift_name">Shift Name:</label>
-        <input type="text" id="shift_name" name="shift_name"><br>
-        <label for="start_time">Start Time:</label>
-        <input type="datetime-local" id="start_time" name="start_time"><br>
-        <label for="end_time">End Time:</label>
-        <input type="datetime-local" id="end_time" name="end_time"><br>
-        <button type="submit">Add Shift</button>
-    </form>
-    <a href="{% url 'shift_list' %}">Back to Shift List</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Add Shift{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Add New Shift</h2>
+    </div>
+    <div class="card-body">
+        {% if messages %}
+            <div class="alert alert-info">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="shift_name">Shift Name:</label>
+                <input type="text" id="shift_name" name="shift_name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="start_time">Start Time:</label>
+                <input type="time" id="start_time" name="start_time" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="end_time">End Time:</label>
+                <input type="time" id="end_time" name="end_time" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add Shift</button>
+        </form>
+        <a href="{% url 'shift_list' %}" class="btn btn-secondary mt-3">Back to Shift List</a>
+    </div>
+</div>
+{% endblock %}

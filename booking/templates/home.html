@@ -1,14 +1,52 @@
-<!-- booking/templates/booking/home.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-</head>
-<body>
-    <h1>Welcome to the Booking System</h1>
-    <a href="/booking/add_shift/">Add Shift</a><br>
-    <a href="/booking/shift_list/">View Shifts</a>
-    <a href="/booking/bookings/">View Bookings</a>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to the Booking System</h1>
+    <p class="lead">Easily manage your shifts and bookings with our system.</p>
+    <hr class="my-4">
+    <p>Explore the features:</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'shift_list' %}" role="button">View Shifts</a>
+    <a class="btn btn-secondary btn-lg" href="{% url 'bookings' %}" role="button">View Bookings</a>
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Manage Shifts</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Create, update, and manage all your shifts from one place.</p>
+                    <a href="{% url 'add_shift' %}" class="btn btn-success">Add Shift</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Book Shifts</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Book shifts and assign nodes quickly and efficiently.</p>
+                    <a href="{% url 'shift_list' %}" class="btn btn-primary">View Shifts</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">View Bookings</h4>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">View all your bookings and their statuses in one place.</p>
+                    <a href="{% url 'bookings' %}" class="btn btn-secondary">View Bookings</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

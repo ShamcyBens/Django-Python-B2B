@@ -1,33 +1,35 @@
-<!-- booking/templates/booking/book_shift.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Book Shift</title>
-</head>
-<body>
-    <h1>Book Shift: {{ shift.shift_name }}</h1>
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-    <form method="POST">
-        {% csrf_token %}
-        <label for="node_id">Select Node:</label>
-        <select id="node_id" name="node_id">
-            {% for node in nodes %}
-                <option value="{{ node.id }}">{{ node.node_name }}</option>
-            {% empty %}
-                <option value="">No nodes available</option>
-            {% endfor %}
-        </select><br>
-        <button type="submit">Book Shift</button>
-    </form>
-    <a href="{% url 'shift_list' %}">Back to Shift List</a>
-    <br>
-    <a href="{% url 'bookings' %}">See all Bookings</a>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Book Shift{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Book Shift: {{ shift.shift_name }}</h2>
+    </div>
+    <div class="card-body">
+        {% if messages %}
+            <div class="alert alert-info">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="node_id">Select Node:</label>
+                <select id="node_id" name="node_id" class="form-control">
+                    {% for node in nodes %}
+                        <option value="{{ node.id }}">{{ node.node_name }}</option>
+                    {% empty %}
+                        <option value="">No nodes available</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Book Shift</button>
+        </form>
+        <a href="{% url 'shift_list' %}" class="btn btn-secondary mt-3">Back to Shift List</a>
+    </div>
+</div>
+{% endblock %}

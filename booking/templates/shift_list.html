@@ -1,15 +1,39 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Shift List</title>
-</head>
-<body>
-    <h1>Shift List</h1>
-    <ul>
-        {% for shift in shifts %}
-            <li>{{ shift.shift_name }} - <a href="{% url 'book_shift' shift.id %}">Book</a></li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'add_shift' %}">Add New Shift</a>
-</body>
-</html>
+<!-- booking/templates/booking/shift_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Shift List{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Shift List</h2>
+    </div>
+    <div class="card-body">
+        <a href="{% url 'add_shift' %}" class="btn btn-success mb-3">Add Shift</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Shift Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for shift in shifts %}
+                    <tr>
+                        <td>{{ shift.id }}</td>
+                        <td>{{ shift.shift_name }}</td>
+                        <td>
+                            <a href="{% url 'book_shift' shift.id %}" class="btn btn-primary btn-sm">Book Shift</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">No shifts available.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

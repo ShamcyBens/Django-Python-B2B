@@ -1,36 +1,39 @@
 <!-- booking/templates/booking/booking_list.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Booked Sessions</title>
-</head>
-<body>
-    <h1>Booked Sessions</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>Shift Name</th>
-                <th>Node</th>
-                <th>Status</th>
-                <th>Date Booked</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for booking in bookings %}
-                <tr>
-                    <td>{{ booking.shift.shift_name }}</td>
-                    <td>{{ booking.node.name }}</td>
-                    <td>{{ booking.status }}</td>
-                    <td>{{ booking.created_at }}</td> <!-- Assuming you have a created_at field -->
-                </tr>
-            {% empty %}
-                <tr>
-                    <td colspan="4">No bookings found.</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+{% extends 'base.html' %}
 
-    <a href="{% url 'shift_list' %}">Back to Shift List</a>
-</body>
-</html>
+{% block title %}Booked Sessions{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Booked Sessions</h2>
+    </div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Shift Name</th>
+                    <th>Node</th>
+                    <th>Status</th>
+                    <th>Date Booked</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                    <tr>
+                        <td>{{ booking.shift.shift_name }}</td>
+                        <td>{{ booking.node.node_name }}</td>
+                        <td>{{ booking.status }}</td>
+                        <td>{{ booking.created_at }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">No bookings found.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'shift_list' %}" class="btn btn-secondary mt-3">Back to Shift List</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Shift, Booking, Node
 from django.http import JsonResponse
+from django.contrib import messages
+
 
 def add_shift(request):
     if request.method == 'POST':
@@ -15,10 +17,6 @@ def shift_list(request):
     shifts = Shift.objects.all()
     return render(request, 'shift_list.html', {'shifts': shifts})
 
-# booking/views.py
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
-from .models import Shift, Node, Booking
 
 def book_shift(request, shift_id):
     shift = get_object_or_404(Shift, id=shift_id)
