@@ -9,5 +9,7 @@ urlpatterns = [
     path('bookings/', views.booking_list, name='bookings'),  # New URL for bookings
     path('api/book_shift/', views.api_book_shift, name='api_book_shift'),
     path('', views.home, name='home'),  # Home page
+    path('booking/booked_shifts/', views.booked_shifts, name='booked_shifts'),
+
 
 ]

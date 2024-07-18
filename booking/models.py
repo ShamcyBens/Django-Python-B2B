@@ -5,6 +5,8 @@ class Shift(models.Model):
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
+    booked = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.shift_name

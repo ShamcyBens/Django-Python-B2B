@@ -9,7 +9,8 @@
     <hr class="my-4">
     <p>Explore the features:</p>
     <a class="btn btn-primary btn-lg" href="{% url 'shift_list' %}" role="button">View Shifts</a>
-    <a class="btn btn-secondary btn-lg" href="{% url 'bookings' %}" role="button">View Bookings</a>
+    <a class="btn btn-secondary btn-lg" href="{% url 'booking_list' %}" role="button">View Bookings</a>
+    <a class="btn btn-info btn-lg" href="{% url 'booked_shifts' %}" role="button">View Booked Shifts</a>
 </div>
 
 <div class="container mt-5">
@@ -43,7 +44,8 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">View all your bookings and their statuses in one place.</p>
-                    <a href="{% url 'bookings' %}" class="btn btn-secondary">View Bookings</a>
+                    <a href="{% url 'booking_list' %}" class="btn btn-secondary">View Bookings</a>
+                    <a href="{% url 'booked_shifts' %}" class="btn btn-info">View Booked Shifts</a>
                 </div>
             </div>
         </div>

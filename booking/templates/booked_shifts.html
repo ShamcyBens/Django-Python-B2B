@@ -1,0 +1,32 @@
+<!-- templates/booked_shifts.html -->
+{% extends 'base.html' %}
+
+{% block title %}Booked Shifts{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">Booked Shifts</h2>
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Shift Name</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Node</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.shift.shift_name }}</td>
+                    <td>{{ booking.shift.start_time }}</td>
+                    <td>{{ booking.shift.end_time }}</td>
+                    <td>{{ booking.node.node_name }}</td>
+                    <td>{{ booking.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

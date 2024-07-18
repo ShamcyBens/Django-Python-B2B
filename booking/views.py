@@ -4,17 +4,23 @@ from django.http import JsonResponse
 from django.contrib import messages
 
 
+def home(request):
+    return render(request, 'home.html')
+
+
 def add_shift(request):
     if request.method == 'POST':
         shift_name = request.POST['shift_name']
         start_time = request.POST['start_time']
         end_time = request.POST['end_time']
         Shift.objects.create(shift_name=shift_name, start_time=start_time, end_time=end_time)
+        messages.success(request, 'Shift added successfully.')
         return redirect('shift_list')
     return render(request, 'add_shift.html')
 
+# views.py
 def shift_list(request):
-    shifts = Shift.objects.all()
+    shifts = Shift.objects.filter(booked=False)  # Only show unbooked shifts
     return render(request, 'shift_list.html', {'shifts': shifts})
 
 
@@ -25,14 +31,14 @@ def book_shift(request, shift_id):
         node_id = request.POST.get('node_id')
         if node_id:
             node = get_object_or_404(Node, id=node_id)
-            Booking.objects.create(shift=shift, node=node, status='pending')
+            Booking.objects.create(shift=shift, node=node, status='booked')
+            shift.booked = True
+            shift.save()
             messages.success(request, f'Successfully booked shift "{shift.shift_name}" for "{node.node_name}".')
             return redirect('shift_list')
         else:
             messages.error(request, 'Please select a node.')
     return render(request, 'book_shift.html', {'shift': shift, 'nodes': nodes})
-
-
 
 def api_get_shifts(request):
     shifts = list(Shift.objects.values())
@@ -48,10 +54,10 @@ def api_book_shift(request):
         return JsonResponse({'booking_id': booking.id, 'status': booking.status})
     return JsonResponse({'error': 'Invalid request'}, status=400)
 
-
-def home(request):
-    return render(request, 'home.html')
-
+# booking/views.py
+def booked_shifts(request):
+    bookings = Booking.objects.all()
+    return render(request, 'booked_shifts.html', {'bookings': bookings})
 
 
 def booking_list(request):
