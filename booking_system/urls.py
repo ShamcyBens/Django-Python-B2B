@@ -7,4 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('booking/', include('booking.urls')),
     path('', RedirectView.as_view(url='/booking/')),  # Redirect root to booking
+    path('accounts/', include('allauth.urls')),
+
 ]
