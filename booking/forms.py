@@ -11,7 +11,7 @@ class CustomUserCreationForm(UserCreationForm):
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'email', 'role', 'profile_picture')
+        fields = ('username', 'email', 'role','phone_number', 'profile_picture')
         
 class RegistrationForm(forms.ModelForm):
     password1 = forms.CharField(widget=forms.PasswordInput)

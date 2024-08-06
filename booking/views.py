@@ -169,7 +169,14 @@ def admin_dashboard(request):
 
 @login_required
 def manager_dashboard(request):
-    return render(request, 'Dashboard/manager_dashboard.html')
+    employees = [
+        {"name": "Jenny Wilson", "email": "jennywilson@gmail.com", "gross_salary": 10310, "taxes": 100.31, "net_salary": 10209.69, "performance": "Good", "status": "Paid"},
+        {"name": "Jane Cooper", "email": "janecooper@gmail.com", "gross_salary": 5210, "taxes": 521, "net_salary": 4689, "performance": "Moderate", "status": "Pending"},
+        {"name": "Guy Hawkins", "email": "guyhawkins@gmail.com", "gross_salary": 3120, "taxes": 936, "net_salary": 2184, "performance": "Good", "status": "Paid"},
+        {"name": "Cody Fisher", "email": "codyfisher@gmail.com", "gross_salary": 7500, "taxes": 2250, "net_salary": 5250, "performance": "Poor", "status": "Unpaid"},
+    ]
+    
+    return render(request, 'Dashboard/manager_dashboard.html', {"employees": employees})
 
 @login_required
 def employee_dashboard(request):
@@ -207,3 +214,6 @@ def deny_swap(request, swap_id):
     swap.save()
     messages.success(request, 'Shift swap denied.')
     return redirect('manage_shift_swaps')
+
+
+
